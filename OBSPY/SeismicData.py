@@ -1,15 +1,15 @@
 class SeismicData():
     def __init__(self, station_data):
         self.__station_data = station_data
-        self.__station_data_preprocessing(station_data)
         self.alive_traces_with_times = []
         self.alive_traces_count = []
+        self.__station_data_preprocessing(station_data)
     def calculate_live_traces(self):
         print('Calculating number of alive traces...')
         for cur_index, time in enumerate(self.times):
             alive_traces = 0
             for trace in self.traces:
-                if trace.data[cur_index] != 0:
+                if type(trace.data[cur_index]) != type(None):
                     alive_traces+=1
             self.alive_traces_with_times.append((time, alive_traces))
         for alive_trace in self.alive_traces_with_times:
@@ -60,5 +60,6 @@ class SeismicData():
         self.times = station_data[0].times('utcdatetime')
         self.starttime = self.times[0]
         self.endtime = self.times[len(self.times)-1]
+        self.calculate_live_traces()
         
         print('Station data preprocessing finished')
