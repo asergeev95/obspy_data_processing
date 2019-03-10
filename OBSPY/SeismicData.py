@@ -1,3 +1,5 @@
+import numpy as np
+
 class SeismicData():
     def __init__(self, station_data):
         self.__station_data = station_data
